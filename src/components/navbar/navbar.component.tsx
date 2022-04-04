@@ -4,7 +4,7 @@ import image from "../../img/store.png";
 import { searchProducts } from "../../reducer/actionCreators";
 import { connect } from "react-redux";
 
-interface NavbarProps{
+interface NavbarProps {
   searchProduct: (search: string) => void;
 }
 
@@ -12,7 +12,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   let name = localStorage.getItem("userName");
   const firstLetter = name?.slice(0).toLocaleUpperCase();
 
-  const [searchValue,setSearchValue]=React.useState("");
+  const [searchValue, setSearchValue] = React.useState("");
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-secondary shadow-lg">
@@ -33,49 +33,63 @@ const Navbar: React.FC<NavbarProps> = (props) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            
             <li className="ms-5 w-75 ">
-              <input
+              {/* <input
                 className="form-control search"
                 type="search"
                 placeholder="Search"
                 value={searchValue}
-                onChange={(e)=>setSearchValue(e.target.value)}
-                aria-label="Search"/>
-                <i className="fa fa-search searchIcon text-secondary" aria-hidden="true" onClick={()=>props.searchProduct(searchValue)}></i>
+                onChange={(e) => setSearchValue(e.target.value)}
+                aria-label="Search"
+              />
+              <i
+                className="fa fa-search searchIcon text-secondary"
+                aria-hidden="true"
+                onClick={() => props.searchProduct(searchValue)}
+              ></i> */}
+              <div className="input-group rounded">
+  <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"   value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}/>
+  <span className="input-group-text border-0" id="search-addon" onClick={() => props.searchProduct(searchValue)}>
+    <i className="fa fa-search"></i>
+  </span>
+</div>
             </li>
           </ul>
           <form className="d-flex profileFlex">
-          < span className="nav-item dropdown">
-            <span
-              className="profileIcon"
-              id="profileDropdown"
-              data-bs-toggle="dropdown"
-              
-            >
-              <i className="fa fa-user me-2" data-bs-toggle="dropdown" aria-hidden="true"></i>
-              {firstLetter}
-            </span>
-            <ul className="dropdown-menu" aria-labelledby="profileDropdown">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  My Orders
-                </a>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Logout
-                </a>
-              </li>
-            </ul>
+            <span className="nav-item dropdown">
+              <span
+                className="profileIcon"
+                id="profileDropdown"
+                data-bs-toggle="dropdown"
+              >
+                <i
+                  className="fa fa-user me-2"
+                  data-bs-toggle="dropdown"
+                  aria-hidden="true"
+                ></i>
+                {firstLetter}
+              </span>
+              <ul className="dropdown-menu" aria-labelledby="profileDropdown">
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Profile
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    My Orders
+                  </a>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Logout
+                  </a>
+                </li>
+              </ul>
             </span>
           </form>
         </div>
@@ -85,10 +99,10 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => {
-
   return {
-    searchProduct: (searchValue: string) => dispatch(searchProducts(searchValue))
-};
+    searchProduct: (searchValue: string) =>
+      dispatch(searchProducts(searchValue)),
+  };
 };
 
 export default connect(null, mapDispatchToProps)(Navbar);

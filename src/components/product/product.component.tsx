@@ -16,6 +16,7 @@ const ProductDetail: React.FC<eccomerceProps> = (props) => {
   React.useEffect(() => {
     if (props.state.search !== "") {
       setLoader(true);
+      setProducts([])
       Sephora.autoComplete(props.state.search).then((res) => {
         setProducts(res.typeAheadTerms);
         setLoader(false);
@@ -35,7 +36,7 @@ const ProductDetail: React.FC<eccomerceProps> = (props) => {
         />
       ) : null}
       <ul className="product-list">
-        {products?.map((product, index) => {
+      {products?.slice(3,products.length).map((product, index) => {
           return (
               <li key={`prdt-lst${index} `}>
                 {product.productName ? (
@@ -52,6 +53,7 @@ const ProductDetail: React.FC<eccomerceProps> = (props) => {
                     className="card-img-top"
                     src={product.defaultSku.skuImages.image50}
                     alt="Card image cap"
+                    loading="lazy"
                   />
                   <div className="card-body">
                   Brand Name: {product.brandName}
