@@ -1,0 +1,32 @@
+.profileIcon{
+    /* border: 2px solid white; */
+    width: 28px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+}
+
+.profileFlex{
+    margin-right: 100px;
+}
+
+.search{
+    width: 172%;
+    margin-left: 132px;
+    position: relative;
+    top: 12px;
+}
+
+.searchIcon{
+    /* position: absolute;
+    right: 31%;
+    bottom: 40%; */
+    position: relative;
+    left: 680px;
+    bottom: 20px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; 
+ }
